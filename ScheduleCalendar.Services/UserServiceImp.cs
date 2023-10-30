@@ -14,7 +14,6 @@ namespace ScheduleCalendar.Services
 
         public async Task<List<User>> GetAllUsersAsync()
         {
-            return new();
             var list = await _userRepository.GetAllAsync();
 
             return list;
