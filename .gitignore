@@ -366,3 +366,6 @@ FodyWeavers.xsd
 database-wal
 database-shm
 database
+/ScheduleCalendar/database
+/ScheduleCalendar/database-shm
+/ScheduleCalendar/database-wal
