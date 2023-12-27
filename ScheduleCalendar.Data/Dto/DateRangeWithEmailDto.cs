@@ -4,6 +4,6 @@
     {
         public DateTime? Start { get; set; }
         public DateTime? End { get; set; }
-        public string? Email { get; set; }
+        public string? Id { get; set; }
     }
 }

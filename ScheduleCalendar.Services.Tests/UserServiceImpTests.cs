@@ -9,7 +9,7 @@ namespace ScheduleCalendar.Services.Tests
         [Fact]
         public async Task GetAllUsersAsync_WhenCalled_ReturnsUsers()
         {
-            var expectedUsers = new List<User>() { new() { Email = "a"} };
+            var expectedUsers = new List<User>() { new() { Id = "a"} };
             var userRepositoryMock = new Mock<UserRepository>();
             var userService = new UserServiceImp(userRepositoryMock.Object);
 

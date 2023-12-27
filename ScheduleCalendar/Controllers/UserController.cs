@@ -25,7 +25,7 @@ namespace ScheduleCalendar.Controllers
         [HttpPost]
         public async Task<IActionResult> CreateOrUpdate(User user)
         {
-            var userInDb = await _dbContext.Users.FindAsync(user.Email);
+            var userInDb = await _dbContext.Users.FindAsync(user.Id);
 
             if (userInDb is not null)
             {
@@ -41,9 +41,9 @@ namespace ScheduleCalendar.Controllers
         }
 
         [HttpDelete("{email}")]
-        public async Task<IActionResult> Delete(string email)
+        public async Task<IActionResult> Delete(string id)
         {
-            var userInDb = await _dbContext.Users.FindAsync(email);
+            var userInDb = await _dbContext.Users.FindAsync(id);
 
             if (userInDb is null) return Ok();
 

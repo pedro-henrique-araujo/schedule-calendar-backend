@@ -8,10 +8,10 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-
 builder.Services.AddDbContext<ScheduleCalendarDbContext>(options =>
 {
-    options.UseSqlite("Data Source=database");
+    var connectionString = builder.Configuration.GetConnectionString("CanteSchedulerCalendar");
+    options.UseSqlServer(connectionString);
 });
 
 var app = builder.Build();
