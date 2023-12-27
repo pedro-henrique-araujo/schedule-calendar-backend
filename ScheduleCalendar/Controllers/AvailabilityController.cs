@@ -30,9 +30,9 @@ namespace ScheduleCalendar.Controllers
                 availabilitiesQueryable = availabilitiesQueryable.Where(a => a.Date.Date <= dateRangeWithEmail.End.Value.Date);
             }
 
-            if (dateRangeWithEmail.Email is not null)
+            if (dateRangeWithEmail.Id is not null)
             {
-                availabilitiesQueryable = availabilitiesQueryable.Where(a => a.UserEmail == dateRangeWithEmail.Email);
+                availabilitiesQueryable = availabilitiesQueryable.Where(a => a.UserId == dateRangeWithEmail.Id);
             }
 
             availabilitiesQueryable = availabilitiesQueryable.Include(a => a.User);
@@ -46,11 +46,11 @@ namespace ScheduleCalendar.Controllers
         public async Task<IActionResult> Create(Availability availability)
         {
 
-            var userInDb = await _dbContext.Users.FindAsync(availability.UserEmail);
+            var userInDb = await _dbContext.Users.FindAsync(availability.Id);
 
             if (userInDb is null) return BadRequest(new { message = "User does not exist" });
 
-            var existingAvailability = await _dbContext.Availabilities.FirstOrDefaultAsync(a => a.UserEmail == availability.UserEmail && a.Date == availability.Date);
+            var existingAvailability = await _dbContext.Availabilities.FirstOrDefaultAsync(a => a.UserId == availability.UserId && a.Date == availability.Date);
 
             if (existingAvailability is not null) return Ok();
 
@@ -64,7 +64,7 @@ namespace ScheduleCalendar.Controllers
         [HttpPatch]
         public async Task<IActionResult> UpdateUserAvailabilities(UserAvailabilitiesDto userAvailability)
         {
-            var userInDb = await _dbContext.Users.FindAsync(userAvailability.User.Email);
+            var userInDb = await _dbContext.Users.FindAsync(userAvailability.User.Id);
 
             if (userInDb is not null)
             {
@@ -79,7 +79,7 @@ namespace ScheduleCalendar.Controllers
             var availabilityInDb = await _dbContext.Availabilities
                 .Where(a => a.Date.Date >= userAvailability.DateRange.Start.Date
                     && a.Date.Date <= userAvailability.DateRange.End.Date
-                    && a.UserEmail == userInDb.Email)
+                    && a.UserId == userInDb.Id)
                 .ToListAsync();
 
             var availabilityDatesInDb = availabilityInDb.Select(a => a.Date);
