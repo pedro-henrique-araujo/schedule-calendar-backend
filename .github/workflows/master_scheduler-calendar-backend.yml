@@ -45,7 +45,7 @@ jobs:
           name: .net-app
 
       - name: Deploy Cante Instance
-        id: deploy-to-webapp
+        id: deploy-to-cante
         uses: azure/webapps-deploy@v2
         with:
           app-name: 'scheduler-calendar-backend'
@@ -54,7 +54,7 @@ jobs:
           package: .
 
       - name: Deploy Media Department Instance
-        id: deploy-to-webapp
+        id: deploy-to-media-department
         uses: azure/webapps-deploy@v2
         with:
           app-name: 'media-schedule-calendar'
