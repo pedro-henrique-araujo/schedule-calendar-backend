@@ -10,7 +10,7 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddDbContext<ScheduleCalendarDbContext>(options =>
 {
-    var connectionString = builder.Configuration.GetConnectionString("CanteSchedulerCalendar");
+    var connectionString = builder.Configuration.GetConnectionString("ScheduleCalendar");
     options.UseSqlServer(connectionString);
 });
 
