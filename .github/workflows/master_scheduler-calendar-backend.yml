@@ -1,7 +1,4 @@
-# Docs for the Azure Web Apps Deploy action: https://github.com/Azure/webapps-deploy
-# More GitHub Actions for Azure: https://github.com/Azure/actions
-
-name: Deploy Cante
+name: Deploy App
 
 on:
   push:
@@ -47,11 +44,20 @@ jobs:
         with:
           name: .net-app
 
-      - name: Deploy to Azure Web App
+      - name: Deploy Cante Instance
         id: deploy-to-webapp
         uses: azure/webapps-deploy@v2
         with:
           app-name: 'scheduler-calendar-backend'
           slot-name: 'Production'
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_4947BF1871FB4CC6AE9BC00300217DFF }}
+          package: .
+
+      - name: Deploy Media Department Instance
+        id: deploy-to-webapp
+        uses: azure/webapps-deploy@v2
+        with:
+          app-name: 'media-schedule-calendar'
+          slot-name: 'Production'
+          publish-profile: ${{ secrets.MEDIA_DEPARTMENT_PUBLISH_PROFILE }}
           package: .
